@@ -1,3 +1,3 @@
-INSERT INTO oowlishroldb.rol (NAME) VALUES ("Developer");
-INSERT INTO oowlishroldb.rol (NAME) VALUES ("Product Owner");
-INSERT INTO oowlishroldb.rol (NAME) VALUES ("Tester");
+INSERT INTO rol (NAME) VALUES ("Developer");
+INSERT INTO rol (NAME) VALUES ("Product Owner");
+INSERT INTO rol (NAME) VALUES ("Tester");

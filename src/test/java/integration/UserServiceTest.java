@@ -19,7 +19,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
+@Testcontainers
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = OowlishRolesAPIApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

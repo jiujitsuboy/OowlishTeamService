@@ -1,7 +1,6 @@
 package integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -20,25 +19,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-//import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
-//@Testcontainers
+@Testcontainers
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
-@SpringBootTest(classes = OowlishRolesAPIApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
-//    , properties = {
-//    "spring.jpa.generate-ddl=true",
-//    "spring.datasource.url=jdbc:tc:mysql:8:///test"
-//}
-)
+@SpringBootTest(classes = OowlishRolesAPIApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql(scripts = "../import.sql")
 class RolServiceTest {
 
   @LocalServerPort
@@ -96,7 +91,7 @@ class RolServiceTest {
     HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
     ResponseEntity<Rol> response = restTemplate.exchange(
-        createURLWithPort("/api/v1/rol/5"),
+        createURLWithPort("/api/v1/rol/500"),
         HttpMethod.GET, entity, Rol.class);
 
     var rol = response.getBody();

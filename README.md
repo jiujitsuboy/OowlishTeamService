@@ -409,6 +409,7 @@ The following list depict the available endpoints of the API:
 
 * Java/Spring boot maven project.
 * MySQL DB
+* Testconteiner (for integration test)
 * Oauth2 Authentication/Authorization
 * Hateoas support
 * Etag support
@@ -430,8 +431,7 @@ The following list depict the available endpoints of the API:
 * *(Optional)* Use [PostMan collection](postman/oowlish.postman_collection.json) to hit the endpoints.
 
 ### Setting Database
-* This API use a MySQL database so we need to configure an instance with the following parameters:
-* 
+This API use a MySQL database so we need to configure an instance with the following parameters:
   * Credentials by default.
     * user: root
     * password: 12345
@@ -444,7 +444,23 @@ The following list depict the available endpoints of the API:
     * *Developer*
     * *Project Manager*
     * *Tester*
+    
+### Orchestration with Containers
+This project comes with a [docker-compose](docker-compose.yaml) file, which start the following containers:
+* mysql: MySQL server exposed on default port (3304)
+* app: Spring boot application (Rest API).
 
+To start these containers execute the following command
+
+   ```
+     docker-compose up
+   ```
+     
+To stop these containers execute the following command
+
+   ```
+     docker-compose down
+   ```
 ### Code Coverage
 Complete coverage of the following layers:
 * Controller

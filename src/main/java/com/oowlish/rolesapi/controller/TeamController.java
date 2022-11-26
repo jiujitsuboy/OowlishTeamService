@@ -31,8 +31,7 @@ public class TeamController {
 
   @ApiOperation(value = "Get Team", nickname = "getTeam", notes = "Retrieve a single team identified by the specified user ID-")
   @ApiResponses(value = {
-      @ApiResponse(code = 202, message = "Retrieve the specified team."),
-      @ApiResponse(code = 500, message = "No Such Team Exception.") })
+      @ApiResponse(code = 200, message = "Retrieve the specified team.")})
   @GetMapping(value = "/teams/{teamId}")
   public ResponseEntity<Team> getTeam(@PathVariable("teamId") String teamId) {
 
@@ -41,7 +40,7 @@ public class TeamController {
 
   @ApiOperation(value = "Get All Teams", nickname = "getAllTeams", notes = "Retrieve all the teams-")
   @ApiResponses(value = {
-      @ApiResponse(code = 202, message = "Retrieve all the team.")})
+      @ApiResponse(code = 200, message = "Retrieve all the team.")})
   @GetMapping(value = "/teams")
   public ResponseEntity<JSONObject[]> getAllTeams() {
     return ok(service.getTeams());

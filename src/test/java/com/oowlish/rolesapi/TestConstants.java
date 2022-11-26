@@ -2,7 +2,7 @@ package com.oowlish.rolesapi;
 
 import com.oowlish.rolesapi.entity.RoleEnum;
 import com.oowlish.rolesapi.entity.UserEntity;
-import com.oowlish.rolesapi.model.User;
+import com.oowlish.rolesapi.model.SystemUser;
 import com.oowlish.rolesapi.security.JwtManager;
 import java.util.UUID;
 
@@ -19,9 +19,9 @@ public class TestConstants {
   public static final String REFRESH_TOKEN = "26rvap1cr3maf85akd9jb27c7dlrlkfn82hn3rahrb9qhr0rcmtl82jjt75tapoqtqktkh6rgdicb7mm1i38qqhdpgb7v8q3omoffu7dj1o8is3h763o54l978tfp95v";
 
 
-  public static User getTestUser(UUID userUUID, String username, String password, String firstname, String lastname, String email) {
+  public static SystemUser getTestUser(UUID userUUID, String username, String password, String firstname, String lastname, String email) {
 
-    User user = new User();
+    SystemUser user = new SystemUser();
     user.setId(userUUID);
     user.setUsername(username);
     user.setPassword(password);
@@ -33,7 +33,7 @@ public class TestConstants {
     return user;
   }
 
-  public static UserEntity getTestUserEntity(User user) {
+  public static UserEntity getTestUserEntity(SystemUser user) {
     UserEntity userEntity = new UserEntity();
     userEntity.setId(user.getId());
     userEntity.setUsername(user.getUsername());

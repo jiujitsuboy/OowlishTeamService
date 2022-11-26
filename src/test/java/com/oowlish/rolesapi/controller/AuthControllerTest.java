@@ -18,7 +18,7 @@ import com.oowlish.rolesapi.hateoas.UserRepresentationModelAssembler;
 import com.oowlish.rolesapi.model.RefreshToken;
 import com.oowlish.rolesapi.model.SignInReq;
 import com.oowlish.rolesapi.model.SignedInUser;
-import com.oowlish.rolesapi.model.User;
+import com.oowlish.rolesapi.model.SystemUser;
 import com.oowlish.rolesapi.service.AuthService;
 import com.oowlish.rolesapi.TestConstants;
 import java.util.Optional;
@@ -169,11 +169,11 @@ class AuthControllerTest {
   public void signUp() throws Exception {
 
     UUID userUUID = UUID.randomUUID();
-    User user = TestConstants.getTestUser(userUUID, TestConstants.USER_NAME_A, TestConstants.USER_PASSWORD_A,
+    SystemUser user = TestConstants.getTestUser(userUUID, TestConstants.USER_NAME_A, TestConstants.USER_PASSWORD_A,
         TestConstants.USER_FIRST_NAME_A, TestConstants.USER_LAST_NAME_A, TestConstants.USER_EMAIL_A);
     UserEntity userEntity = TestConstants.getTestUserEntity(user);
 
-    when(authService.signUp(any(User.class))).thenReturn(userEntity);
+    when(authService.signUp(any(SystemUser.class))).thenReturn(userEntity);
 
     mvc.perform(post("/api/v1/auth/users")
             .contentType(MediaType.APPLICATION_JSON)

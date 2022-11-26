@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.oowlish.rolesapi.entity.RoleEnum;
 import com.oowlish.rolesapi.entity.UserEntity;
-import com.oowlish.rolesapi.model.User;
+import com.oowlish.rolesapi.model.SystemUser;
 import com.oowlish.rolesapi.service.Util;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,7 +34,7 @@ class UserRepositoryTest {
     String userName = "gianniWehner";
     String email = "gianni@email.com";
 
-    User user = User.builder().id(userUUID).firstName(firstName).lastName(lastName).username(userName).email(email).role(RoleEnum.USER).build();
+    SystemUser user = SystemUser.builder().id(userUUID).firstName(firstName).lastName(lastName).username(userName).email(email).role(RoleEnum.USER).build();
 
     UserEntity userEntity = (UserEntity) Util.toEntity(user);
     userEntity.setPassword("mypassword");

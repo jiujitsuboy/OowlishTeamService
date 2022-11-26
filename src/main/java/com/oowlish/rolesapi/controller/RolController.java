@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.util.List;
+import java.util.NoSuchElementException;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,19 +40,19 @@ public class RolController {
     this.userRolAssembler = userRolAssembler;
   }
 
-  @ApiOperation(value = "Update player", nickname = "updatePlayer", notes = "Allow to update firstname, lastname and country of the player-")
+  @ApiOperation(value = "Assign Rol to User", nickname = "assignRol", notes = "Assign an preexisting Rol to User")
   @ApiResponses(value = {
-      @ApiResponse(code = 202, message = "Update a couple of attributes of the player."),
+      @ApiResponse(code = 202, message = "Assigned rol to user."),
       @ApiResponse(code = 500, message = "No Such Player Exception.") })
   @PatchMapping(value = "/")
   public ResponseEntity<UserRol> assignRol(@Valid @RequestBody(required = true) UserRol userRol) {
     return status(HttpStatus.ACCEPTED).body(userRolAssembler.toModel(service.assignRol(userRol)));
   }
 
-  @ApiOperation(value = "Update player", nickname = "updatePlayer", notes = "Allow to update firstname, lastname and country of the player-")
+  @ApiOperation(value = "Create Rol", nickname = "createRol", notes = "Create a new team rol.")
   @ApiResponses(value = {
-      @ApiResponse(code = 202, message = "Update a couple of attributes of the player."),
-      @ApiResponse(code = 500, message = "No Such Player Exception.") })
+      @ApiResponse(code = 202, message = "Created new rol."),
+      @ApiResponse(code = 406, message = "Rol already exists exception .") })
   @PostMapping(value = "/")
   public ResponseEntity<Rol> createRol(@Valid @RequestBody(required = true) Rol rol) {
     return status(HttpStatus.CREATED).body(rolAssembler.toModel(service.create(rol)));
@@ -59,15 +60,17 @@ public class RolController {
 
   @ApiOperation(value = "Get Rol", nickname = "getRol", notes = "Retrieve a specific Roles-")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Retrieve all players.")})
+      @ApiResponse(code = 200, message = "Retrieve all players."),
+      @ApiResponse(code = 404, message = "No Such element exception .")})
   @GetMapping(value = "/{rolId}")
   public ResponseEntity<Rol> getRol(@PathVariable("rolId") Long rolId) {
       return ok(rolAssembler.toModel(service.getRol(rolId)));
   }
 
-  @ApiOperation(value = "Get All Roles", nickname = "getRoles", notes = "Retrieve all Roles-")
+  @ApiOperation(value = "Get rol by membership", nickname = "getRolByMembership", notes = "Get a rol searching by userId and TeamId (Membership)")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Retrieve all players.")})
+      @ApiResponse(code = 200, message = "Retrieve all players."),
+      @ApiResponse(code = 404, message = "No Such element exception .")})
   @GetMapping(value = "/{userId}/{teamId}")
   public ResponseEntity<UserRol> getRolByMembership(@PathVariable("userId") String userId,@PathVariable("teamId") String teamId ) {
       return ok(userRolAssembler.toModel(service.getAssignedRol(userId, teamId)));
@@ -81,7 +84,7 @@ public class RolController {
       return ok(rolAssembler.toListModel(service.getRoles()));
   }
 
-  @ApiOperation(value = "Get All Roles", nickname = "getRoles", notes = "Retrieve all Roles-")
+  @ApiOperation(value = "Get all memberships from rol", nickname = "getMemberships", notes = "Get all memberships with the specified rol")
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Retrieve all players.")})
   @GetMapping(value = "/membership/{rol}")

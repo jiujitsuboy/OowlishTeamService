@@ -7,7 +7,7 @@ import com.oowlish.rolesapi.model.RefreshToken;
 import com.oowlish.rolesapi.model.SignedInUser;
 import com.oowlish.rolesapi.exception.GenericAlreadyExistsException;
 import com.oowlish.rolesapi.exception.InvalidRefreshTokenException;
-import com.oowlish.rolesapi.model.User;
+import com.oowlish.rolesapi.model.SystemUser;
 import com.oowlish.rolesapi.repository.UserRepository;
 import com.oowlish.rolesapi.repository.UserTokenRepository;
 import com.oowlish.rolesapi.security.JwtManager;
@@ -46,7 +46,7 @@ public class AuthServiceImpl implements AuthService {
   }
 
   @Override
-  public UserEntity signUp(User user) {
+  public UserEntity signUp(SystemUser user) {
     UserEntity userEntity = createUser(user);
 //    teamService.createTeamForUser(userEntity);
     return userEntity;
@@ -105,7 +105,7 @@ public class AuthServiceImpl implements AuthService {
   }
 
   @Transactional
-  protected UserEntity createUser(User user) {
+  protected UserEntity createUser(SystemUser user) {
     Integer count = userRepository.countByUsernameOrEmail(user.getUsername(), user.getEmail());
      if (count > 0) {
       throw new GenericAlreadyExistsException("Use different username and email.");

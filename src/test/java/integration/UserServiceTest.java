@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.oowlish.rolesapi.OowlishRolesAPIApplication;
-import com.oowlish.rolesapi.model.User2;
+import com.oowlish.rolesapi.model.User;
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,11 +37,11 @@ class UserServiceTest {
 
     HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
-    ResponseEntity<User2> response = restTemplate.exchange(
+    ResponseEntity<User> response = restTemplate.exchange(
         "https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/users/fd282131-d8aa-4819-b0c8-d9e0bfb1b75c",
-        HttpMethod.GET, entity, User2.class);
+        HttpMethod.GET, entity, User.class);
 
-    User2 user = response.getBody();
+    User user = response.getBody();
     user.setRole("Developer");
     String expected = "{\"id\": \"fd282131-d8aa-4819-b0c8-d9e0bfb1b75c\", \"firstName\": \"Gianni\", \"lastName\": \"Wehner\", \"displayName\": \"gianniWehner\", \"avatarUrl\": \"https://cdn.fakercloud.com/avatars/rude_128.jpg\", \"location\": \"Brakusstad\"}";
 

@@ -15,7 +15,7 @@ import com.oowlish.rolesapi.exception.GenericAlreadyExistsException;
 import com.oowlish.rolesapi.exception.InvalidRefreshTokenException;
 import com.oowlish.rolesapi.model.RefreshToken;
 import com.oowlish.rolesapi.model.SignedInUser;
-import com.oowlish.rolesapi.model.User;
+import com.oowlish.rolesapi.model.SystemUser;
 import com.oowlish.rolesapi.repository.UserRepository;
 import com.oowlish.rolesapi.repository.UserTokenRepository;
 import com.oowlish.rolesapi.security.JwtManager;
@@ -54,7 +54,7 @@ class AuthServiceTest {
     final int ZERO_RECORD = 0;
 
     UUID userUUID = UUID.randomUUID();
-    User user = TestConstants.getTestUser(userUUID,TestConstants.USER_NAME_A, TestConstants.USER_PASSWORD_A, TestConstants.USER_FIRST_NAME_A, TestConstants.USER_LAST_NAME_A, TestConstants.USER_EMAIL_A);
+    SystemUser user = TestConstants.getTestUser(userUUID,TestConstants.USER_NAME_A, TestConstants.USER_PASSWORD_A, TestConstants.USER_FIRST_NAME_A, TestConstants.USER_LAST_NAME_A, TestConstants.USER_EMAIL_A);
     user.setRole(null);
 //    doNothing().when(teamService).createTeamForUser(any(UserEntity.class));
     when(userRepository.countByUsernameOrEmail(anyString(), anyString())).thenReturn(ZERO_RECORD);
@@ -74,7 +74,7 @@ class AuthServiceTest {
     final int ZERO_RECORD = 0;
 
     UUID userUUID = UUID.randomUUID();
-    User user = TestConstants.getTestUser(userUUID,TestConstants.USER_NAME_A, TestConstants.USER_PASSWORD_A, TestConstants.USER_FIRST_NAME_A, TestConstants.USER_LAST_NAME_A, TestConstants.USER_EMAIL_A);
+    SystemUser user = TestConstants.getTestUser(userUUID,TestConstants.USER_NAME_A, TestConstants.USER_PASSWORD_A, TestConstants.USER_FIRST_NAME_A, TestConstants.USER_LAST_NAME_A, TestConstants.USER_EMAIL_A);
     user.setRole(RoleEnum.ADMIN);
 //    doNothing().when(teamService).createTeamForUser(any(UserEntity.class));
     when(userRepository.countByUsernameOrEmail(anyString(), anyString())).thenReturn(ZERO_RECORD);
@@ -93,7 +93,7 @@ class AuthServiceTest {
   public void signUpGenericAlreadyExistsException() {
     final int ONE_RECORD = 1;
 
-    User user = TestConstants.getTestUser(UUID.randomUUID(),TestConstants.USER_NAME_A, TestConstants.USER_PASSWORD_A, TestConstants.USER_FIRST_NAME_A, TestConstants.USER_LAST_NAME_A, TestConstants.USER_EMAIL_A);
+    SystemUser user = TestConstants.getTestUser(UUID.randomUUID(),TestConstants.USER_NAME_A, TestConstants.USER_PASSWORD_A, TestConstants.USER_FIRST_NAME_A, TestConstants.USER_LAST_NAME_A, TestConstants.USER_EMAIL_A);
 
     when(userRepository.countByUsernameOrEmail(anyString(), anyString())).thenReturn(ONE_RECORD);
 

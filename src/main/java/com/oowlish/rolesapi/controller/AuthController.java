@@ -8,7 +8,7 @@ import com.oowlish.rolesapi.hateoas.UserRepresentationModelAssembler;
 import com.oowlish.rolesapi.model.RefreshToken;
 import com.oowlish.rolesapi.model.SignInReq;
 import com.oowlish.rolesapi.model.SignedInUser;
-import com.oowlish.rolesapi.model.User;
+import com.oowlish.rolesapi.model.SystemUser;
 import com.oowlish.rolesapi.service.AuthService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -70,7 +70,7 @@ public class AuthController {
       @ApiResponse(code = 201, message = "SignUp user and create his team."),
       @ApiResponse(code = 409, message = "Generic Already Exists Exception.")})
   @PostMapping(value = "/users")
-  public ResponseEntity<User> signUp(@Valid @RequestBody(required = false) User user) {
+  public ResponseEntity<SystemUser> signUp(@Valid @RequestBody(required = false) SystemUser user) {
     return status(HttpStatus.CREATED).body(userAssembler.toModel(service.signUp(user)));
   }
 

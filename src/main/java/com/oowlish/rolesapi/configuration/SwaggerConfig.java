@@ -32,13 +32,13 @@ public class SwaggerConfig {
         .securityContexts(Arrays.asList(securityContext()))
         .securitySchemes(Arrays.asList(apiKey()))
         .select()
-        .apis(RequestHandlerSelectors.basePackage("com.toptal.dreamteamapi.controller"))
+        .apis(RequestHandlerSelectors.basePackage("com.oowlish.rolesapi.controller"))
         .paths(PathSelectors.regex("/api/.*"))
         .build();
   }
 
   private ApiInfo getApiInfo(){
-    return new ApiInfo("Dream Team API","Dream Team API Description", "1.0","", new Contact("","",""), "LICENSE", "LICENSE_URL", Collections.emptyList());
+    return new ApiInfo("Oowlish Team API","Ooslish Team API Description", "1.0","", new Contact("","",""), "LICENSE", "LICENSE_URL", Collections.emptyList());
   }
 
   private ApiKey apiKey() {

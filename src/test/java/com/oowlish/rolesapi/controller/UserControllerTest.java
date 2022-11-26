@@ -11,9 +11,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oowlish.rolesapi.TestConstants;
 import com.oowlish.rolesapi.configuration.AppConfig;
 import com.oowlish.rolesapi.entity.RoleEnum;
-import com.oowlish.rolesapi.model.User2;
+import com.oowlish.rolesapi.model.User;
 import com.oowlish.rolesapi.security.JwtManager;
-import com.oowlish.rolesapi.service.User2Service;
+import com.oowlish.rolesapi.service.UserService;
 import java.util.List;
 import java.util.UUID;
 import net.minidev.json.JSONObject;
@@ -43,7 +43,7 @@ class UserControllerTest {
   @Autowired
   private JwtManager tokenManager;
   @MockBean
-  private User2Service service;
+  private UserService service;
 
   private String token;
 
@@ -62,7 +62,7 @@ class UserControllerTest {
     String avatarUrl = "https://cdn.fakercloud.com/avatars/rude_128.jpg";
     String location = "Brakusstad";
 
-    User2 user = User2.builder().id(userUUID).firstName(firstName).lastName(lastName).displayName(displayName).avatarUrl(avatarUrl).location(location).build();
+    User user = User.builder().id(userUUID).firstName(firstName).lastName(lastName).displayName(displayName).avatarUrl(avatarUrl).location(location).build();
 
     JSONObject jsonObject = new JSONObject();
     jsonObject.appendField("id", userUUID);
@@ -97,8 +97,8 @@ class UserControllerTest {
     String avatarUrl = "https://cdn.fakercloud.com/avatars/rude_128.jpg";
     String location = "Brakusstad";
 
-    List<User2> users = List.of(User2.builder().id(userUUID).firstName(firstName).lastName(lastName).displayName(displayName).avatarUrl(avatarUrl).location(location).build(),
-    User2.builder().id(userUUID).firstName(firstName).lastName(lastName).displayName(displayName).avatarUrl(avatarUrl).location(location).build());
+    List<User> users = List.of(User.builder().id(userUUID).firstName(firstName).lastName(lastName).displayName(displayName).avatarUrl(avatarUrl).location(location).build(),
+    User.builder().id(userUUID).firstName(firstName).lastName(lastName).displayName(displayName).avatarUrl(avatarUrl).location(location).build());
 
     JSONObject[] jsonObjects = new JSONObject[users.size()];
 

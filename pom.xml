@@ -9,10 +9,10 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.toptal</groupId>
-  <artifactId>DreamTeamApi</artifactId>
+  <artifactId>OowlishTeamApi</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>DreamTeamApi</name>
-  <description>DreamTeamApi</description>
+  <name>OowlishTeamApi</name>
+  <description>OowlishTeamApi</description>
   <properties>
     <java.version>11</java.version>
   </properties>

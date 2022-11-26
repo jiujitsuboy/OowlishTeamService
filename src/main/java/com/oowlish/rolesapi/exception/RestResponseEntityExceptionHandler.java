@@ -48,28 +48,6 @@ public class RestResponseEntityExceptionHandler {
     return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
   }
 
-  @ExceptionHandler(NoSuchPlayerException.class)
-  protected ResponseEntity<Object> noSuchPlayerException(
-      NoSuchPlayerException ex, WebRequest request) {
-
-    Map<String, Object> body = new LinkedHashMap<>();
-    body.put("timestamp", LocalDateTime.now());
-    body.put("message", ex.getMessage());
-
-    return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-  }
-
-  @ExceptionHandler(NoSuchTeamException.class)
-  protected ResponseEntity<Object> noSuchTeamException(
-      NoSuchTeamException ex, WebRequest request) {
-
-    Map<String, Object> body = new LinkedHashMap<>();
-    body.put("timestamp", LocalDateTime.now());
-    body.put("message", ex.getMessage());
-
-    return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-  }
-
   @ExceptionHandler(InsufficientAuthenticationException.class)
   protected ResponseEntity<Object> insufficientAuthenticationException(
       InsufficientAuthenticationException ex, WebRequest request) {

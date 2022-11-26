@@ -3,7 +3,7 @@ package com.oowlish.rolesapi.controller;
 import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.http.ResponseEntity.status;
 
-import com.oowlish.rolesapi.service.User2Service;
+import com.oowlish.rolesapi.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "User Controller")
 public class UserController {
 
-  private final User2Service service;
+  private final UserService service;
 
-  public UserController(User2Service service) {
+  public UserController(UserService service) {
     this.service = service;
   }
 
@@ -37,7 +37,7 @@ public class UserController {
 
   @ApiOperation(value = "Get All users", nickname = "getAllUsers", notes = "Retrieve all users-")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Retrieve all players.")})
+      @ApiResponse(code = 200, message = "Retrieve all users.")})
   @GetMapping(value = "/users")
   public ResponseEntity<JSONObject[]> getAllUsers() {
     return ok(service.getUsers());

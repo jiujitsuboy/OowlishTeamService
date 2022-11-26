@@ -1,0 +1,209 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RolController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.oowlish.rolesapi.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: RolController (com.oowlish.rolesapi.controller)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RolController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">RolController$$EnhancerBySpringCGLIB$$44422e27</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.oowlish.rolesapi.controller;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import static org.springframework.http.ResponseEntity.ok;
+<i class="no-highlight">4</i>&nbsp;import static org.springframework.http.ResponseEntity.status;
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;import com.oowlish.rolesapi.hateoas.RolRepresentationModelAssembler;
+<i class="no-highlight">7</i>&nbsp;import com.oowlish.rolesapi.hateoas.UserRolRepresentationModelAssembler;
+<i class="no-highlight">8</i>&nbsp;import com.oowlish.rolesapi.model.Rol;
+<i class="no-highlight">9</i>&nbsp;import com.oowlish.rolesapi.model.UserRol;
+<i class="no-highlight">10</i>&nbsp;import com.oowlish.rolesapi.service.RolService;
+<i class="no-highlight">11</i>&nbsp;import io.swagger.annotations.Api;
+<i class="no-highlight">12</i>&nbsp;import io.swagger.annotations.ApiOperation;
+<i class="no-highlight">13</i>&nbsp;import io.swagger.annotations.ApiResponse;
+<i class="no-highlight">14</i>&nbsp;import io.swagger.annotations.ApiResponses;
+<i class="no-highlight">15</i>&nbsp;import java.util.List;
+<i class="no-highlight">16</i>&nbsp;import java.util.NoSuchElementException;
+<i class="no-highlight">17</i>&nbsp;import javax.validation.Valid;
+<i class="no-highlight">18</i>&nbsp;import org.springframework.http.HttpStatus;
+<i class="no-highlight">19</i>&nbsp;import org.springframework.http.ResponseEntity;
+<i class="no-highlight">20</i>&nbsp;import org.springframework.web.bind.annotation.GetMapping;
+<i class="no-highlight">21</i>&nbsp;import org.springframework.web.bind.annotation.PatchMapping;
+<i class="no-highlight">22</i>&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+<i class="no-highlight">23</i>&nbsp;import org.springframework.web.bind.annotation.PostMapping;
+<i class="no-highlight">24</i>&nbsp;import org.springframework.web.bind.annotation.RequestBody;
+<i class="no-highlight">25</i>&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+<i class="no-highlight">26</i>&nbsp;import org.springframework.web.bind.annotation.RestController;
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;@RestController
+<i class="no-highlight">29</i>&nbsp;@RequestMapping(&quot;/api/v1/rol&quot;)
+<i class="no-highlight">30</i>&nbsp;@Api(value = &quot;User Controller&quot;)
+<i class="no-highlight">31</i>&nbsp;public class RolController {
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;  private final RolService service;
+<i class="no-highlight">34</i>&nbsp;  private final RolRepresentationModelAssembler rolAssembler;
+<i class="no-highlight">35</i>&nbsp;  private final UserRolRepresentationModelAssembler userRolAssembler;
+<b class="fc"><i class="no-highlight">36</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;  public RolController(RolService service, RolRepresentationModelAssembler rolAssembler, UserRolRepresentationModelAssembler userRolAssembler) {</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    this.service = service;</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    this.rolAssembler = rolAssembler;</b>
+<i class="no-highlight">40</i>&nbsp;    this.userRolAssembler = userRolAssembler;
+<i class="no-highlight">41</i>&nbsp;  }
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;  @ApiOperation(value = &quot;Assign Rol to User&quot;, nickname = &quot;assignRol&quot;, notes = &quot;Assign an preexisting Rol to User&quot;)
+<i class="no-highlight">44</i>&nbsp;  @ApiResponses(value = {
+<i class="no-highlight">45</i>&nbsp;      @ApiResponse(code = 202, message = &quot;Assigned rol to user.&quot;),
+<i class="no-highlight">46</i>&nbsp;      @ApiResponse(code = 500, message = &quot;No Such Player Exception.&quot;) })
+<i class="no-highlight">47</i>&nbsp;  @PatchMapping(value = &quot;/&quot;)
+<b class="fc"><i class="no-highlight">48</i>&nbsp;  public ResponseEntity&lt;UserRol&gt; assignRol(@Valid @RequestBody(required = true) UserRol userRol) {</b>
+<i class="no-highlight">49</i>&nbsp;    return status(HttpStatus.ACCEPTED).body(userRolAssembler.toModel(service.assignRol(userRol)));
+<i class="no-highlight">50</i>&nbsp;  }
+<i class="no-highlight">51</i>&nbsp;
+<i class="no-highlight">52</i>&nbsp;  @ApiOperation(value = &quot;Create Rol&quot;, nickname = &quot;createRol&quot;, notes = &quot;Create a new team rol.&quot;)
+<i class="no-highlight">53</i>&nbsp;  @ApiResponses(value = {
+<i class="no-highlight">54</i>&nbsp;      @ApiResponse(code = 202, message = &quot;Created new rol.&quot;),
+<i class="no-highlight">55</i>&nbsp;      @ApiResponse(code = 406, message = &quot;Rol already exists exception .&quot;) })
+<i class="no-highlight">56</i>&nbsp;  @PostMapping(value = &quot;/&quot;)
+<b class="fc"><i class="no-highlight">57</i>&nbsp;  public ResponseEntity&lt;Rol&gt; createRol(@Valid @RequestBody(required = true) Rol rol) {</b>
+<i class="no-highlight">58</i>&nbsp;    return status(HttpStatus.CREATED).body(rolAssembler.toModel(service.create(rol)));
+<i class="no-highlight">59</i>&nbsp;  }
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;  @ApiOperation(value = &quot;Get Rol&quot;, nickname = &quot;getRol&quot;, notes = &quot;Retrieve a specific Roles-&quot;)
+<i class="no-highlight">62</i>&nbsp;  @ApiResponses(value = {
+<i class="no-highlight">63</i>&nbsp;      @ApiResponse(code = 200, message = &quot;Retrieve all players.&quot;),
+<i class="no-highlight">64</i>&nbsp;      @ApiResponse(code = 404, message = &quot;No Such element exception .&quot;)})
+<b class="fc"><i class="no-highlight">65</i>&nbsp;  @GetMapping(value = &quot;/{rolId}&quot;)</b>
+<i class="no-highlight">66</i>&nbsp;  public ResponseEntity&lt;Rol&gt; getRol(@PathVariable(&quot;rolId&quot;) Long rolId) {
+<i class="no-highlight">67</i>&nbsp;      return ok(rolAssembler.toModel(service.getRol(rolId)));
+<i class="no-highlight">68</i>&nbsp;  }
+<i class="no-highlight">69</i>&nbsp;
+<i class="no-highlight">70</i>&nbsp;  @ApiOperation(value = &quot;Get rol by membership&quot;, nickname = &quot;getRolByMembership&quot;, notes = &quot;Get a rol searching by userId and TeamId (Membership)&quot;)
+<i class="no-highlight">71</i>&nbsp;  @ApiResponses(value = {
+<i class="no-highlight">72</i>&nbsp;      @ApiResponse(code = 200, message = &quot;Retrieve all players.&quot;),
+<b class="fc"><i class="no-highlight">73</i>&nbsp;      @ApiResponse(code = 404, message = &quot;No Such element exception .&quot;)})</b>
+<i class="no-highlight">74</i>&nbsp;  @GetMapping(value = &quot;/{userId}/{teamId}&quot;)
+<i class="no-highlight">75</i>&nbsp;  public ResponseEntity&lt;UserRol&gt; getRolByMembership(@PathVariable(&quot;userId&quot;) String userId,@PathVariable(&quot;teamId&quot;) String teamId ) {
+<i class="no-highlight">76</i>&nbsp;      return ok(userRolAssembler.toModel(service.getAssignedRol(userId, teamId)));
+<i class="no-highlight">77</i>&nbsp;  }
+<i class="no-highlight">78</i>&nbsp;
+<i class="no-highlight">79</i>&nbsp;  @ApiOperation(value = &quot;Get All Roles&quot;, nickname = &quot;getRoles&quot;, notes = &quot;Retrieve all Roles-&quot;)
+<i class="no-highlight">80</i>&nbsp;  @ApiResponses(value = {
+<b class="fc"><i class="no-highlight">81</i>&nbsp;      @ApiResponse(code = 200, message = &quot;Retrieve all players.&quot;)})</b>
+<i class="no-highlight">82</i>&nbsp;  @GetMapping(value = &quot;/&quot;)
+<i class="no-highlight">83</i>&nbsp;  public ResponseEntity&lt;List&lt;Rol&gt;&gt; getRoles() {
+<i class="no-highlight">84</i>&nbsp;      return ok(rolAssembler.toListModel(service.getRoles()));
+<i class="no-highlight">85</i>&nbsp;  }
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;  @ApiOperation(value = &quot;Get all memberships from rol&quot;, nickname = &quot;getMemberships&quot;, notes = &quot;Get all memberships with the specified rol&quot;)
+<i class="no-highlight">88</i>&nbsp;  @ApiResponses(value = {
+<b class="fc"><i class="no-highlight">89</i>&nbsp;      @ApiResponse(code = 200, message = &quot;Retrieve all players.&quot;)})</b>
+<i class="no-highlight">90</i>&nbsp;  @GetMapping(value = &quot;/membership/{rol}&quot;)
+<i class="no-highlight">91</i>&nbsp;  public ResponseEntity&lt;List&lt;UserRol&gt;&gt; getMemberships(@PathVariable(&quot;rol&quot;) String rol) {
+<i class="no-highlight">92</i>&nbsp;      return ok(userRolAssembler.toListModel(service.getMemberShips(rol)));
+<i class="no-highlight">93</i>&nbsp;  }
+<i class="no-highlight">94</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-26 12:29</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RolService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.oowlish.rolesapi.service</a>
+</div>
+
+<h1>Coverage Summary for Class: RolService (com.oowlish.rolesapi.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">RolService$MockitoMock$251638589</td>
+  </tr>
+  <tr>
+    <td class="name">RolService$MockitoMock$251638589$auxiliary$2NK2GdCD</td>
+  </tr>
+  <tr>
+    <td class="name">RolService$MockitoMock$251638589$auxiliary$uuV6v59w</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.oowlish.rolesapi.service;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.oowlish.rolesapi.model.Rol;
+<i class="no-highlight">4</i>&nbsp;import com.oowlish.rolesapi.model.UserRol;
+<i class="no-highlight">5</i>&nbsp;import java.util.List;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;/**
+<i class="no-highlight">8</i>&nbsp; * Player available operations
+<i class="no-highlight">9</i>&nbsp; */
+<i class="no-highlight">10</i>&nbsp;public interface RolService {
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;  /**
+<i class="no-highlight">13</i>&nbsp;   * Return the player identified by the Id
+<i class="no-highlight">14</i>&nbsp;   * @param id user&#39;s id
+<i class="no-highlight">15</i>&nbsp;   * @return @link{PlayerEntity}
+<i class="no-highlight">16</i>&nbsp;   */
+<i class="no-highlight">17</i>&nbsp;  Rol getRol(long id);
+<i class="no-highlight">18</i>&nbsp;  List&lt;Rol&gt; getRoles();
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;  Rol create(Rol rol);
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;  UserRol assignRol(UserRol userRol);
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;  UserRol getAssignedRol(String idUser, String idTeam);
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;  List&lt;UserRol&gt; getMemberShips(String rolName);
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-11-26 12:29</div>
+</div>
+</body>
+</html>

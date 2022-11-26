@@ -3,7 +3,7 @@ package com.oowlish.rolesapi.service;
 import com.oowlish.rolesapi.entity.UserEntity;
 import com.oowlish.rolesapi.model.RefreshToken;
 import com.oowlish.rolesapi.model.SignedInUser;
-import com.oowlish.rolesapi.model.User;
+import com.oowlish.rolesapi.model.SystemUser;
 import java.util.Optional;
 
 /**
@@ -16,7 +16,7 @@ public interface AuthService {
    * @param user user's data
    * @return @Link{UserEntity}
    */
-  UserEntity signUp(User user);
+  UserEntity signUp(SystemUser user);
 
   /**
    * Validate the credentials of an user to generate access tokens

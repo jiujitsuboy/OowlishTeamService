@@ -4,8 +4,8 @@ import com.oowlish.rolesapi.entity.RolEntity;
 import com.oowlish.rolesapi.entity.UserEntity;
 import com.oowlish.rolesapi.entity.UserRolEntity;
 import com.oowlish.rolesapi.model.Rol;
+import com.oowlish.rolesapi.model.SystemUser;
 import com.oowlish.rolesapi.model.User;
-import com.oowlish.rolesapi.model.User2;
 import com.oowlish.rolesapi.model.UserRol;
 import java.util.List;
 import org.springframework.beans.BeanUtils;
@@ -25,9 +25,9 @@ public class Util {
   public static <M> Object toEntity(M model) {
     Object entity = null;
 
-    if (model instanceof User) {
+    if (model instanceof SystemUser) {
       entity = new UserEntity();
-    } else if (model instanceof User2) {
+    } else if (model instanceof User) {
       entity = new UserEntity();
     } else if (model instanceof Rol) {
       entity = new RolEntity();
@@ -41,7 +41,7 @@ public class Util {
   public static <E> Object toModel(E entity) {
     Object model = null;
     if (entity instanceof UserEntity) {
-      model = new User();
+      model = new SystemUser();
     } else if (entity instanceof UserRol) {
       model = new UserRol();
     } else if (entity instanceof Rol) {

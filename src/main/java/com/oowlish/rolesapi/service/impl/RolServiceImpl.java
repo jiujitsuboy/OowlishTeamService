@@ -66,8 +66,6 @@ public class RolServiceImpl implements RolService {
 
     UserRolEntity userRolEntitySaved = userRolRepository.save(userRolEntity);
 
-//    UserRolEntity userRolEntityTmp = userRolRepository.findById(userRolEntitySaved.getId()).get();
-
     userRol.setId(userRolEntitySaved.getId());
 
     return userRol;

@@ -3,12 +3,13 @@
 ### Reference Documentation
 
 This API enhanced these following urls 
-[Teams](https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/teams) and [Users](https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/users). The following are the functionalities offered by this API.
+[Teams](https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/teams) and [Users](https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/users) by adding the concept of team rol to users of a team.
+The following are the functionalities offered by this API.
 
-* Retrieve all the **Users** of the API.
-* Retrieve an specific **User** and see all his details.
-* Retrieve all the **Teams** of the API.
-* Retrieve an specific **Team** and see all his details.
+* Retrieve all the **Users** of the API *(pass through)*.
+* Retrieve an specific **User** and see all his details *(passthrough)*.
+* Retrieve all the **Teams** of the API *(pass through)*.
+* Retrieve an specific **Team** and see all his details ***(Enhanced endpoint. Adds the rol for every team member)***.
 * Create **Team Roles**.
 * Assign **Team Roles** to a **Users** on a specific **Team**.
 * Search **Rol's** by **Membership**.

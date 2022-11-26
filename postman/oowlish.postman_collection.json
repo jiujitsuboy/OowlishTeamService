@@ -331,10 +331,10 @@
 			]
 		},
 		{
-			"name": "Rol",
+			"name": "Role",
 			"item": [
 				{
-					"name": "create rol",
+					"name": "create role",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"content-type": true
@@ -359,12 +359,12 @@
 							"raw": "{\n    \"name\": \"QA\"\n}"
 						},
 						"url": {
-							"raw": "{{url}}/rol/",
+							"raw": "{{url}}/role/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"rol",
+								"role",
 								""
 							]
 						}
@@ -385,10 +385,15 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8082/api/v1/rol/membership/Developer",
+							"raw": "http://localhost:8082/api/v1/role/membership/Developer",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -397,7 +402,7 @@
 							"path": [
 								"api",
 								"v1",
-								"rol",
+								"role",
 								"membership",
 								"Developer"
 							]
@@ -406,7 +411,7 @@
 					"response": []
 				},
 				{
-					"name": "assign rol",
+					"name": "assign role",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"content-type": true
@@ -428,19 +433,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"idUser\":\"54383a18-425c-4f50-9424-1c4c27e776dd\",\n    \"idTeam\": \"7676a4bf-adfe-415c-941b-1739af07039b\",\n    \"rol\": {\n        \"id\": 1,\n        \"name\": \"Developer\"\n    }    \n}"
+							"raw": "{\n    \"idUser\":\"371d2ee8-cdf4-48cf-9ddb-04798b79ad9e\",\n    \"idTeam\": \"7676a4bf-adfe-415c-941b-1739af07039b\",\n    \"rol\": {\n        \"id\":2,\n        \"name\": \"Product Owner\"\n    }    \n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/api/v1/rol/",
-							"protocol": "http",
+							"raw": "{{url}}/role/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8082",
 							"path": [
-								"api",
-								"v1",
-								"rol",
+								"role",
 								""
 							]
 						}
@@ -448,7 +449,7 @@
 					"response": []
 				},
 				{
-					"name": "get rol",
+					"name": "get role",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"content-type": true
@@ -469,24 +470,20 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8082/api/v1/rol/6",
-							"protocol": "http",
+							"raw": "{{url}}/role/1",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8082",
 							"path": [
-								"api",
-								"v1",
-								"rol",
-								"6"
+								"role",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "get rol by membership",
+					"name": "get role by membership",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"content-type": true
@@ -507,13 +504,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/rol/54383a18-425c-4f50-9424-1c4c27e776dd/7676a4bf-adfe-415c-941b-1739af07039b",
+							"raw": "{{url}}/role/371d2ee8-cdf4-48cf-9ddb-04798b79ad9e/7676a4bf-adfe-415c-941b-1739af07039b",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"rol",
-								"54383a18-425c-4f50-9424-1c4c27e776dd",
+								"role",
+								"371d2ee8-cdf4-48cf-9ddb-04798b79ad9e",
 								"7676a4bf-adfe-415c-941b-1739af07039b"
 							]
 						}
@@ -542,12 +539,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/rol/",
+							"raw": "{{url}}/role/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"rol",
+								"role",
 								""
 							]
 						}

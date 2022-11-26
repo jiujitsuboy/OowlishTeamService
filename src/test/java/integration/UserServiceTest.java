@@ -22,8 +22,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
-@ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
+@ActiveProfiles("test")
 @SpringBootTest(classes = OowlishRolesAPIApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserServiceTest {
 
@@ -79,10 +79,4 @@ class UserServiceTest {
 
     JSONAssert.assertEquals(expected, response.getBody(), false);
   }
-
-  private String createURLWithPort(String uri) {
-    return "http://localhost:" + port + uri;
-  }
-
-
 }

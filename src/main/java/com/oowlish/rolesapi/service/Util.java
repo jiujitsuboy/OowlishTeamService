@@ -1,12 +1,12 @@
 package com.oowlish.rolesapi.service;
 
-import com.oowlish.rolesapi.entity.RolEntity;
+import com.oowlish.rolesapi.entity.RoleEntity;
 import com.oowlish.rolesapi.entity.UserEntity;
-import com.oowlish.rolesapi.entity.UserRolEntity;
-import com.oowlish.rolesapi.model.Rol;
+import com.oowlish.rolesapi.entity.UserRoleEntity;
+import com.oowlish.rolesapi.model.Role;
 import com.oowlish.rolesapi.model.SystemUser;
 import com.oowlish.rolesapi.model.User;
-import com.oowlish.rolesapi.model.UserRol;
+import com.oowlish.rolesapi.model.UserRole;
 import java.util.List;
 import org.springframework.beans.BeanUtils;
 
@@ -29,10 +29,10 @@ public class Util {
       entity = new UserEntity();
     } else if (model instanceof User) {
       entity = new UserEntity();
-    } else if (model instanceof Rol) {
-      entity = new RolEntity();
-    } else if (model instanceof UserRol) {
-      entity = new UserRolEntity();
+    } else if (model instanceof Role) {
+      entity = new RoleEntity();
+    } else if (model instanceof UserRole) {
+      entity = new UserRoleEntity();
     }
     BeanUtils.copyProperties(model, entity);
     return entity;
@@ -42,10 +42,10 @@ public class Util {
     Object model = null;
     if (entity instanceof UserEntity) {
       model = new SystemUser();
-    } else if (entity instanceof UserRol) {
-      model = new UserRol();
-    } else if (entity instanceof Rol) {
-      model = new Rol();
+    } else if (entity instanceof UserRole) {
+      model = new UserRole();
+    } else if (entity instanceof Role) {
+      model = new Role();
     }
 
     BeanUtils.copyProperties(entity, model);

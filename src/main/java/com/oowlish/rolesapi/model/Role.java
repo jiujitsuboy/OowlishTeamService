@@ -10,7 +10,7 @@ import org.springframework.hateoas.RepresentationModel;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Rol extends RepresentationModel<Rol> {
+public class Role extends RepresentationModel<Role> {
 
   private Long id;
   private String name;

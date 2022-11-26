@@ -4,9 +4,8 @@ import static java.util.stream.Collectors.toList;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-import com.oowlish.rolesapi.controller.RolController;
-import com.oowlish.rolesapi.entity.UserRolEntity;
-import com.oowlish.rolesapi.model.UserRol;
+import com.oowlish.rolesapi.controller.RoleController;
+import com.oowlish.rolesapi.model.UserRole;
 import com.oowlish.rolesapi.service.Util;
 import java.util.Collections;
 import java.util.List;
@@ -16,20 +15,20 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserRolRepresentationModelAssembler extends RepresentationModelAssemblerSupport<UserRol, UserRol> {
+public class UserRolRepresentationModelAssembler extends RepresentationModelAssemblerSupport<UserRole, UserRole> {
 
   public UserRolRepresentationModelAssembler() {
-    super(RolController.class, UserRol.class);
+    super(RoleController.class, UserRole.class);
   }
 
   @Override
-  public UserRol toModel(UserRol entity) {
-    UserRol userRol= (UserRol) Util.toModel(entity);
-    userRol.add(linkTo(methodOn(RolController.class).getRol(userRol.getId())).withRel("rol"));
+  public UserRole toModel(UserRole entity) {
+    UserRole userRol= (UserRole) Util.toModel(entity);
+    userRol.add(linkTo(methodOn(RoleController.class).getRole(userRol.getId())).withRel("rol"));
     return userRol;
   }
 
-  public List<UserRol> toListModel(Iterable<UserRol> entities) {
+  public List<UserRole> toListModel(Iterable<UserRole> entities) {
     if (Objects.isNull(entities)) {
       return Collections.emptyList();
     }

@@ -27,7 +27,7 @@ class UserServiceTest {
   @Mock
   private RestTemplate restTemplate;
   @Mock
-  private RolService rolService;
+  private RoleService rolService;
   @InjectMocks
   private UserServiceImpl classUnderTest;
 

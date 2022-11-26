@@ -9,14 +9,14 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
-import com.oowlish.rolesapi.entity.RolEntity;
-import com.oowlish.rolesapi.entity.UserRolEntity;
+import com.oowlish.rolesapi.entity.RoleEntity;
+import com.oowlish.rolesapi.entity.UserRoleEntity;
 import com.oowlish.rolesapi.exception.RolAlreadyExistsException;
-import com.oowlish.rolesapi.model.Rol;
-import com.oowlish.rolesapi.model.UserRol;
-import com.oowlish.rolesapi.repository.RolRepository;
-import com.oowlish.rolesapi.repository.UserRolRepository;
-import com.oowlish.rolesapi.service.impl.RolServiceImpl;
+import com.oowlish.rolesapi.model.Role;
+import com.oowlish.rolesapi.model.UserRole;
+import com.oowlish.rolesapi.repository.RoleRepository;
+import com.oowlish.rolesapi.repository.UserRoleRepository;
+import com.oowlish.rolesapi.service.impl.RoleServiceImpl;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -28,26 +28,26 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class RolServiceTest {
+class RoleServiceTest {
 
   @Mock
-  private RolRepository rolRepository;
+  private RoleRepository rolRepository;
   @Mock
-  private UserRolRepository userRolRepository;
+  private UserRoleRepository userRolRepository;
 
   @InjectMocks
-  private RolServiceImpl classUnderTest;
+  private RoleServiceImpl classUnderTest;
 
 
   @Test
   public void getRol(){
     Long rolId = 1L;
 
-    RolEntity rolEntity = RolEntity.builder().id(1L).name("Developer").build();
+    RoleEntity rolEntity = RoleEntity.builder().id(1L).name("Developer").build();
 
     when(rolRepository.findById(anyLong())).thenReturn(Optional.of(rolEntity));
 
-    Rol rol = classUnderTest.getRol(rolId);
+    Role rol = classUnderTest.getRole(rolId);
     assertNotNull(rol);
     assertEquals(rolEntity.getId(),rol.getId());
     assertEquals(rolEntity.getName(),rol.getName());
@@ -60,18 +60,18 @@ class RolServiceTest {
 
     when(rolRepository.findById(anyLong())).thenReturn(Optional.empty());;
 
-    assertThrows(NoSuchElementException.class,()->classUnderTest.getRol(rolId));
+    assertThrows(NoSuchElementException.class,()->classUnderTest.getRole(rolId));
   }
 
   @Test
   public void getRoles(){
 
-    List<RolEntity> rolEntities = List.of(RolEntity.builder().id(1L).name("Developer").build(),
-        RolEntity.builder().id(2L).name("Product Owner").build());
+    List<RoleEntity> rolEntities = List.of(RoleEntity.builder().id(1L).name("Developer").build(),
+        RoleEntity.builder().id(2L).name("Product Owner").build());
 
     when(rolRepository.findAll()).thenReturn(rolEntities);
 
-    List<Rol> roles = classUnderTest.getRoles();
+    List<Role> roles = classUnderTest.getRoles();
     for(int index=0;index<roles.size();index++){
       assertNotNull(roles.get(index));
       assertEquals(rolEntities.get(index).getId(),roles.get(index).getId());
@@ -81,14 +81,14 @@ class RolServiceTest {
 
   @Test
   public void createRol(){
-    RolEntity rolEntity = RolEntity.builder().id(1L).name("Developer").build();
+    RoleEntity rolEntity = RoleEntity.builder().id(1L).name("Developer").build();
 
-    Rol rol = Rol.builder().name("Developer").build();
+    Role rol = Role.builder().name("Developer").build();
 
     when(rolRepository.findByName(anyString())).thenReturn(Optional.empty());
-    when(rolRepository.save(any(RolEntity.class))).thenReturn(rolEntity);
+    when(rolRepository.save(any(RoleEntity.class))).thenReturn(rolEntity);
 
-    Rol rolCreated = classUnderTest.create(rol);
+    Role rolCreated = classUnderTest.create(rol);
 
     assertNotNull(rolCreated);
     assertEquals(rolEntity.getId(),rolCreated.getId());
@@ -98,8 +98,8 @@ class RolServiceTest {
 
   @Test
   public void createRolAlreadyExistsException(){
-    RolEntity rolEntity = RolEntity.builder().id(1L).name("Developer").build();
-    Rol rol = Rol.builder().name("Developer").build();
+    RoleEntity rolEntity = RoleEntity.builder().id(1L).name("Developer").build();
+    Role rol = Role.builder().name("Developer").build();
 
     when(rolRepository.findByName(anyString())).thenReturn(Optional.of(rolEntity));
 
@@ -112,15 +112,15 @@ class RolServiceTest {
     String idUser = UUID.randomUUID().toString();
     String idTeam = UUID.randomUUID().toString();
 
-    Rol rol = Rol.builder().name("Tester").build();
-    RolEntity rolEntity = RolEntity.builder().id(3L).name("Tester").build();
+    Role rol = Role.builder().name("Tester").build();
+    RoleEntity rolEntity = RoleEntity.builder().id(3L).name("Tester").build();
 
-    UserRol userRol = UserRol.builder().idUser(idUser).idTeam(idTeam).rol(rol).build();
-    UserRolEntity userRolEntity = UserRolEntity.builder().id(1L).idUser(idUser).idTeam(idTeam).rol(rolEntity).build();
+    UserRole userRol = UserRole.builder().idUser(idUser).idTeam(idTeam).rol(rol).build();
+    UserRoleEntity userRolEntity = UserRoleEntity.builder().id(1L).idUser(idUser).idTeam(idTeam).role(rolEntity).build();
 
-    when(userRolRepository.save(any(UserRolEntity.class))).thenReturn(userRolEntity);
+    when(userRolRepository.save(any(UserRoleEntity.class))).thenReturn(userRolEntity);
 
-    UserRol userRolCreated = classUnderTest.assignRol(userRol);
+    UserRole userRolCreated = classUnderTest.assignRole(userRol);
 
     assertNotNull(userRolCreated);
     assertNotNull(userRolCreated.getId());
@@ -135,15 +135,15 @@ class RolServiceTest {
     String idUser = UUID.randomUUID().toString();
     String idTeam = UUID.randomUUID().toString();
 
-    Rol rol = Rol.builder().name("Tester").build();
-    RolEntity rolEntity = RolEntity.builder().id(3L).name("Tester").build();
+    Role rol = Role.builder().name("Tester").build();
+    RoleEntity rolEntity = RoleEntity.builder().id(3L).name("Tester").build();
 
-    UserRol userRol = UserRol.builder().idUser(idUser).idTeam(idTeam).rol(rol).build();
-    UserRolEntity userRolEntity = UserRolEntity.builder().id(1L).idUser(idUser).idTeam(idTeam).rol(rolEntity).build();
+    UserRole userRol = UserRole.builder().idUser(idUser).idTeam(idTeam).rol(rol).build();
+    UserRoleEntity userRolEntity = UserRoleEntity.builder().id(1L).idUser(idUser).idTeam(idTeam).role(rolEntity).build();
 
-    when(userRolRepository.findUserRolEntityByIdUserAndIdTeam(anyString(), anyString())).thenReturn(Optional.of(userRolEntity));
+    when(userRolRepository.findUserRoleEntityByIdUserAndIdTeam(anyString(), anyString())).thenReturn(Optional.of(userRolEntity));
 
-    UserRol userRolRetrieved = classUnderTest.getAssignedRol(idUser, idTeam);
+    UserRole userRolRetrieved = classUnderTest.getAssignedRole(idUser, idTeam);
 
     assertNotNull(userRolRetrieved);
     assertNotNull(userRolRetrieved.getId());
@@ -157,9 +157,9 @@ class RolServiceTest {
     String idUser = UUID.randomUUID().toString();
     String idTeam = UUID.randomUUID().toString();
 
-    when(userRolRepository.findUserRolEntityByIdUserAndIdTeam(anyString(), anyString())).thenReturn(Optional.empty());
+    when(userRolRepository.findUserRoleEntityByIdUserAndIdTeam(anyString(), anyString())).thenReturn(Optional.empty());
 
-    assertThrows(NoSuchElementException.class,()->classUnderTest.getAssignedRol(idUser, idTeam));
+    assertThrows(NoSuchElementException.class,()->classUnderTest.getAssignedRole(idUser, idTeam));
   }
 
   @Test
@@ -170,15 +170,16 @@ class RolServiceTest {
     String idTeam1 = UUID.randomUUID().toString();
     String idTeam2 = UUID.randomUUID().toString();
 
-    RolEntity rolEntity1 = RolEntity.builder().id(1L).name("Developer").build();
-    RolEntity rolEntity2 = RolEntity.builder().id(3L).name("Tester").build();
+    RoleEntity rolEntity1 = RoleEntity.builder().id(1L).name("Developer").build();
+    RoleEntity rolEntity2 = RoleEntity.builder().id(3L).name("Tester").build();
 
-    List<UserRolEntity> usersRolEntity = List.of(UserRolEntity.builder().id(1L).idUser(idUser).idTeam(idTeam1).rol(rolEntity1).build(),
-        UserRolEntity.builder().id(2L).idUser(idUser).idTeam(idTeam2).rol(rolEntity2).build());
+    List<UserRoleEntity> usersRolEntity = List.of(
+        UserRoleEntity.builder().id(1L).idUser(idUser).idTeam(idTeam1).role(rolEntity1).build(),
+        UserRoleEntity.builder().id(2L).idUser(idUser).idTeam(idTeam2).role(rolEntity2).build());
 
-    when(userRolRepository.findUserRolEntityByRolName(anyString())).thenReturn(usersRolEntity);
+    when(userRolRepository.findUserRoleEntityByRoleName(anyString())).thenReturn(usersRolEntity);
 
-    List<UserRol> usersRol = classUnderTest.getMemberShips(rolName);
+    List<UserRole> usersRol = classUnderTest.getMemberShips(rolName);
 
     assertTrue(usersRol.size()>0);
   }

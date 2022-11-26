@@ -5,15 +5,14 @@ import static org.springframework.http.ResponseEntity.status;
 
 import com.oowlish.rolesapi.hateoas.RolRepresentationModelAssembler;
 import com.oowlish.rolesapi.hateoas.UserRolRepresentationModelAssembler;
-import com.oowlish.rolesapi.model.Rol;
-import com.oowlish.rolesapi.model.UserRol;
-import com.oowlish.rolesapi.service.RolService;
+import com.oowlish.rolesapi.model.Role;
+import com.oowlish.rolesapi.model.UserRole;
+import com.oowlish.rolesapi.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.util.List;
-import java.util.NoSuchElementException;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,69 +25,69 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/rol")
+@RequestMapping("/api/v1/role")
 @Api(value = "User Controller")
-public class RolController {
+public class RoleController {
 
-  private final RolService service;
+  private final RoleService service;
   private final RolRepresentationModelAssembler rolAssembler;
   private final UserRolRepresentationModelAssembler userRolAssembler;
 
-  public RolController(RolService service, RolRepresentationModelAssembler rolAssembler, UserRolRepresentationModelAssembler userRolAssembler) {
+  public RoleController(RoleService service, RolRepresentationModelAssembler rolAssembler, UserRolRepresentationModelAssembler userRolAssembler) {
     this.service = service;
     this.rolAssembler = rolAssembler;
     this.userRolAssembler = userRolAssembler;
   }
 
-  @ApiOperation(value = "Assign Rol to User", nickname = "assignRol", notes = "Assign an preexisting Rol to User")
+  @ApiOperation(value = "Assign Role to User", nickname = "assignRole", notes = "Assign an preexisting Role to User")
   @ApiResponses(value = {
       @ApiResponse(code = 202, message = "Assigned rol to user."),
       @ApiResponse(code = 500, message = "No Such Player Exception.") })
   @PatchMapping(value = "/")
-  public ResponseEntity<UserRol> assignRol(@Valid @RequestBody(required = true) UserRol userRol) {
-    return status(HttpStatus.ACCEPTED).body(userRolAssembler.toModel(service.assignRol(userRol)));
+  public ResponseEntity<UserRole> assignRole(@Valid @RequestBody(required = true) UserRole userRol) {
+    return status(HttpStatus.ACCEPTED).body(userRolAssembler.toModel(service.assignRole(userRol)));
   }
 
-  @ApiOperation(value = "Create Rol", nickname = "createRol", notes = "Create a new team rol.")
+  @ApiOperation(value = "Create Role", nickname = "createRole", notes = "Create a new team role.")
   @ApiResponses(value = {
-      @ApiResponse(code = 202, message = "Created new rol."),
+      @ApiResponse(code = 202, message = "Created new role."),
       @ApiResponse(code = 406, message = "Rol already exists exception .") })
   @PostMapping(value = "/")
-  public ResponseEntity<Rol> createRol(@Valid @RequestBody(required = true) Rol rol) {
+  public ResponseEntity<Role> createRole(@Valid @RequestBody(required = true) Role rol) {
     return status(HttpStatus.CREATED).body(rolAssembler.toModel(service.create(rol)));
   }
 
-  @ApiOperation(value = "Get Rol", nickname = "getRol", notes = "Retrieve a specific Roles-")
+  @ApiOperation(value = "Get Role", nickname = "getRole", notes = "Retrieve a specific Roles-")
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Retrieve all players."),
       @ApiResponse(code = 404, message = "No Such element exception .")})
-  @GetMapping(value = "/{rolId}")
-  public ResponseEntity<Rol> getRol(@PathVariable("rolId") Long rolId) {
-      return ok(rolAssembler.toModel(service.getRol(rolId)));
+  @GetMapping(value = "/{roleId}")
+  public ResponseEntity<Role> getRole(@PathVariable("roleId") Long roleId) {
+      return ok(rolAssembler.toModel(service.getRole(roleId)));
   }
 
-  @ApiOperation(value = "Get rol by membership", nickname = "getRolByMembership", notes = "Get a rol searching by userId and TeamId (Membership)")
+  @ApiOperation(value = "Get role by membership", nickname = "getRoleByMembership", notes = "Get a role searching by userId and TeamId (Membership)")
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Retrieve all players."),
       @ApiResponse(code = 404, message = "No Such element exception .")})
   @GetMapping(value = "/{userId}/{teamId}")
-  public ResponseEntity<UserRol> getRolByMembership(@PathVariable("userId") String userId,@PathVariable("teamId") String teamId ) {
-      return ok(userRolAssembler.toModel(service.getAssignedRol(userId, teamId)));
+  public ResponseEntity<UserRole> getRoleByMembership(@PathVariable("userId") String userId,@PathVariable("teamId") String teamId ) {
+      return ok(userRolAssembler.toModel(service.getAssignedRole(userId, teamId)));
   }
 
   @ApiOperation(value = "Get All Roles", nickname = "getRoles", notes = "Retrieve all Roles-")
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Retrieve all players.")})
   @GetMapping(value = "/")
-  public ResponseEntity<List<Rol>> getRoles() {
+  public ResponseEntity<List<Role>> getRoles() {
       return ok(rolAssembler.toListModel(service.getRoles()));
   }
 
-  @ApiOperation(value = "Get all memberships from rol", nickname = "getMemberships", notes = "Get all memberships with the specified rol")
+  @ApiOperation(value = "Get all memberships from role", nickname = "getMemberships", notes = "Get all memberships with the specified role")
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Retrieve all players.")})
-  @GetMapping(value = "/membership/{rol}")
-  public ResponseEntity<List<UserRol>> getMemberships(@PathVariable("rol") String rol) {
-      return ok(userRolAssembler.toListModel(service.getMemberShips(rol)));
+  @GetMapping(value = "/membership/{role}")
+  public ResponseEntity<List<UserRole>> getMemberships(@PathVariable("role") String role) {
+      return ok(userRolAssembler.toListModel(service.getMemberShips(role)));
   }
 }

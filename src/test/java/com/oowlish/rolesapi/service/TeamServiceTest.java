@@ -8,9 +8,9 @@ import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.oowlish.rolesapi.model.Member;
-import com.oowlish.rolesapi.model.Rol;
+import com.oowlish.rolesapi.model.Role;
 import com.oowlish.rolesapi.model.Team;
-import com.oowlish.rolesapi.model.UserRol;
+import com.oowlish.rolesapi.model.UserRole;
 import com.oowlish.rolesapi.service.impl.TeamServiceImpl;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -34,7 +34,7 @@ class TeamServiceTest {
   @Mock
   private RestTemplate restTemplate;
   @Mock
-  private RolService rolService;
+  private RoleService rolService;
   @InjectMocks
   private TeamServiceImpl classUnderTest;
 
@@ -55,8 +55,8 @@ class TeamServiceTest {
     Team team = Team.builder().id(teamUUID).teamLeadId(teamUserUUID).name(teamName).members(members)
         .build();
 
-    Rol rol = Rol.builder().id(1L).name(rolName).build();
-    UserRol userRol = UserRol.builder().id(1L).idUser(userUUID1).idTeam(teamUUID).rol(rol).build();
+    Role rol = Role.builder().id(1L).name(rolName).build();
+    UserRole userRol = UserRole.builder().id(1L).idUser(userUUID1).idTeam(teamUUID).rol(rol).build();
 
     HttpHeaders headers = new HttpHeaders();
     HttpEntity<String> entity = new HttpEntity<>(null, headers);
@@ -64,7 +64,7 @@ class TeamServiceTest {
     when(restTemplate.exchange(
         String.format("https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/teams/%s", teamUUID),
         HttpMethod.GET, entity, Team.class)).thenReturn(new ResponseEntity<>(team, HttpStatus.OK));
-    when(rolService.getAssignedRol(anyString(), anyString())).thenReturn(userRol);
+    when(rolService.getAssignedRole(anyString(), anyString())).thenReturn(userRol);
 
     Team teamRetrieved = classUnderTest.getTeam(teamUUID);
 

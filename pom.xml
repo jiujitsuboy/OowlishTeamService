@@ -8,11 +8,11 @@
     <version>2.4.5</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.toptal</groupId>
+  <groupId>com.oowlish</groupId>
   <artifactId>OowlishTeamApi</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>OowlishTeamApi</name>
-  <description>OowlishTeamApi</description>
+  <description>Oowlish Team Api</description>
   <properties>
     <java.version>11</java.version>
   </properties>

@@ -6,14 +6,14 @@ This API enhanced these following urls
 [Teams](https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/teams) and [Users](https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/users) by adding the concept of team rol to users of a team.
 The following are the functionalities offered by this API.
 
-* Retrieve all the **Users** of the API *(pass through)*.
+* Retrieve all the **Users** of the API *(passthrough)*.
 * Retrieve an specific **User** and see all his details *(passthrough)*.
-* Retrieve all the **Teams** of the API *(pass through)*.
-* Retrieve an specific **Team** and see all his details ***(Enhanced endpoint. Adds the rol for every team member)***.
+* Retrieve all the **Teams** of the API *(passthrough)*.
+* Retrieve an specific **Team** and see all his details ***(Enhanced endpoint. Adds the role of every team member)***.
 * Create **Team Roles**.
 * Assign **Team Roles** to a **Users** on a specific **Team**.
-* Search **Rol's** by **Membership**.
-* Search **Membership's** by **Rol**.
+* Search **Role's** by **Membership**.
+* Search **Membership's** by **Role**.
 
 ### API endpoints
 
@@ -182,7 +182,7 @@ The following list depict the available endpoints of the API:
              },
              {
                 "id": "54383a18-425c-4f50-9424-1c4c27e776dd",
-                "rol": "Developer",
+                "role": "Developer",
                 "links": [
                   {
                      "rel": "self",
@@ -246,12 +246,12 @@ The following list depict the available endpoints of the API:
          ]
        ```
 4. Roles
-   * [Get rol (GET)](http://localhost:8082/api/v1/rol/{{rolId}})
+   * [Get role (GET)](http://localhost:8082/api/v1/role/{{roleId}})
 
      Request:
 
        ```
-        curl --location --request GET 'http://localhost:8082/api/v1/rol/1' \
+        curl --location --request GET 'http://localhost:8082/api/v1/role/1' \
              --header 'Content-Type: application/json' \
              --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzY290dDIiLCJyb2xlcyI6WyJVU0VSIl0sImlzcyI6Ik9vd2xpc2ggVGVhbSBBUEkiLCJleHAiOjE2Njk0ODE2MzksImlhdCI6MTY2OTQ4MDczOX0.czw-9Mk4Ghd8LsYbA5gy8x-CRKM4GfbnqJyJjH4LI_4ZqAiGtRnDl20QdPJrmwPPZSWls_OkWlenkfxbuZszCKnCfWn5k0wWjO7kthgPlSMm9YrPct28Gf28W6v0L6iwmPpa24XaU2ywozo_2r65V9VucbCWAEAzvOyWqPneEuPxilCNCAQi5-4BRF2EXgKkGXWoNwFoFMgmZbUtX4pULo1K19pVOWNjaF2ljt3LPGdbpWbkDuG8MOEXLvKjDIUTqm9_eQNGCkUcU362TF5HEyJBCuG0gt4q-sqDGMs2Nt3-Uc1Ue_m3jxaYURUjJXVHlvQi6a6tEQN6xjx0ozMaeypEbGwiIMf04So0mP67U2LKLUOT_IvtX4JVMleQx1i50ZRV-bU572mpPuNh6vs20aHAlCHJLZc1_Lq48y9mUXQtbrmp31sDmtXr-CjMSKH_WsLVLg28eJFD4Di8IKcuiw21UpfNyiNTnSVlfIyRg1tUjv06mbO_9eLS7zxJ98A6dTC9XpW582Ruu5r9N6EwRQwxe4Npw4P93eDQE3W97-YnybRjSjXKN6DZITMw2I-hUFlJVcSRgldb4d2oJsTB_ZJokwRXUcvUeMT4CFY_Z1NSnPZxJssOylF5I4EJeAXC2JsnaVe2c1h08Q-tf_KTMwB7h3hE2rqCuJ4HOUdgrJU'
        ```
@@ -263,18 +263,18 @@ The following list depict the available endpoints of the API:
            "name": "Developer",
            "links": [
               {
-                "rel": "rol",
-                "href": "http://localhost:8082/api/v1/rol/1"
+                "rel": "role",
+                "href": "http://localhost:8082/api/v1/role/1"
               }
             ]
          }
        ```
-   * [Get all roles  (GET)](http://localhost:8082/api/v1/rol/)
+   * [Get all roles  (GET)](http://localhost:8082/api/v1/role/)
 
      Request:
 
        ```
-        curl --location --request GET 'http://localhost:8082/api/v1/rol' \
+        curl --location --request GET 'http://localhost:8082/api/v1/role' \
              --header 'Content-Type: application/json' \
              --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzY290dDIiLCJyb2xlcyI6WyJVU0VSIl0sImlzcyI6Ik9vd2xpc2ggVGVhbSBBUEkiLCJleHAiOjE2Njk0ODE2MzksImlhdCI6MTY2OTQ4MDczOX0.czw-9Mk4Ghd8LsYbA5gy8x-CRKM4GfbnqJyJjH4LI_4ZqAiGtRnDl20QdPJrmwPPZSWls_OkWlenkfxbuZszCKnCfWn5k0wWjO7kthgPlSMm9YrPct28Gf28W6v0L6iwmPpa24XaU2ywozo_2r65V9VucbCWAEAzvOyWqPneEuPxilCNCAQi5-4BRF2EXgKkGXWoNwFoFMgmZbUtX4pULo1K19pVOWNjaF2ljt3LPGdbpWbkDuG8MOEXLvKjDIUTqm9_eQNGCkUcU362TF5HEyJBCuG0gt4q-sqDGMs2Nt3-Uc1Ue_m3jxaYURUjJXVHlvQi6a6tEQN6xjx0ozMaeypEbGwiIMf04So0mP67U2LKLUOT_IvtX4JVMleQx1i50ZRV-bU572mpPuNh6vs20aHAlCHJLZc1_Lq48y9mUXQtbrmp31sDmtXr-CjMSKH_WsLVLg28eJFD4Di8IKcuiw21UpfNyiNTnSVlfIyRg1tUjv06mbO_9eLS7zxJ98A6dTC9XpW582Ruu5r9N6EwRQwxe4Npw4P93eDQE3W97-YnybRjSjXKN6DZITMw2I-hUFlJVcSRgldb4d2oJsTB_ZJokwRXUcvUeMT4CFY_Z1NSnPZxJssOylF5I4EJeAXC2JsnaVe2c1h08Q-tf_KTMwB7h3hE2rqCuJ4HOUdgrJU'
        ```
@@ -287,8 +287,8 @@ The following list depict the available endpoints of the API:
               "name": "Developer",
               "links": [
                 {
-                  "rel": "rol",
-                  "href": "http://localhost:8082/api/v1/rol/1"
+                  "rel": "role",
+                  "href": "http://localhost:8082/api/v1/role/1"
                 }
               ]
            },
@@ -297,8 +297,8 @@ The following list depict the available endpoints of the API:
               "name": "Product Owner",
               "links": [
                 {
-                  "rel": "rol",
-                  "href": "http://localhost:8082/api/v1/rol/2"
+                  "rel": "role",
+                  "href": "http://localhost:8082/api/v1/role/2"
                 }
               ]
            },
@@ -307,19 +307,19 @@ The following list depict the available endpoints of the API:
               "name": "Tester",
               "links": [
                 {
-                  "rel": "rol",
-                  "href": "http://localhost:8082/api/v1/rol/3"
+                  "rel": "role",
+                  "href": "http://localhost:8082/api/v1/role/3"
                 }
               ]
            }
          ]
        ```
-   * [Get rol by membership (GET)](http://localhost:8082/api/v1/rol/{{userId}}/{{teamId}})
+   * [Get role by membership (GET)](http://localhost:8082/api/v1/role/{{userId}}/{{teamId}})
 
      Request:
 
        ```
-        curl --location --request GET 'http://localhost:8082/api/v1/rol/371d2ee8-cdf4-48cf-9ddb-04798b79ad9e/7676a4bf-adfe-415c-941b-1739af07039b' \
+        curl --location --request GET 'http://localhost:8082/api/v1/role/371d2ee8-cdf4-48cf-9ddb-04798b79ad9e/7676a4bf-adfe-415c-941b-1739af07039b' \
              --header 'Content-Type: application/json' \
              --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzY290dDIiLCJyb2xlcyI6WyJVU0VSIl0sImlzcyI6Ik9vd2xpc2ggVGVhbSBBUEkiLCJleHAiOjE2Njk0ODI3MjcsImlhdCI6MTY2OTQ4MTgyN30.SfX1d8R783hbHsuPnCFkKS8C82ACurRhoIyQnUQ0izN27h7F-kQYfovjvhhPnvPVmk7kNJd128sZohmTP96bMNma5Qot9b1vcp8SIfYwahR7BVE3aoyuFccfU-4jGJMBasS9UVYLvHHjS2DTrj3yrlaRA3CnyYLMY2LfnrvsPV4ItG_THTYl1pqLsNLmemyLp19oNKgHFbZlBLRotqTsQCmcVqRijWhZX0IKOjvsNB3BBZwKhrmr3t72BpVhqOa-8vUnzv9OVnPQsRjck5duFi9ZPj-LtY1eXF2jXNSSOT_vFna9LGy310FmJ_7UfqNutJphr2Xp5mdpjOt2_EyyalZcNpKwGv2V4iUupYLT2r0_kWxuIU4oxFTcmW2IrVpX0Or4M-ns7jVQYCBoGpV1XWSGKOjD6NJWyE72iOxPTyJg3HlLOfT3L_LuGn7Sr_ALxi_aoHB_pvFP-OiP9yXkWMeH6mR8KkJ12MKwrQhZw6M7S-121-95gKalBl6JRym8vuWWAFcm2NzE9toQwrNFAgLTrrOnF7l1-6aTd0W-W97jUD7knBHTp2eRwEHVx7Rw2pVQFAAyDBjSCB8o21nIu_nV7va2zXjBj6sTJHT4lq4oD9RCuTW5P8gYMky_WhLO-jM_vjR1Kdo8uFBijfE94oBQPZGl6x5Skyrj08sWJf0'
        ```
@@ -330,25 +330,25 @@ The following list depict the available endpoints of the API:
             "id": 1,
             "idTeam": "7676a4bf-adfe-415c-941b-1739af07039b",
             "idUser": "371d2ee8-cdf4-48cf-9ddb-04798b79ad9e",
-            "rol": {
+            "role": {
                  "id": 5,
                  "name": "Product Owner",
                  "links": []
             },         
             "links": [
                 {
-                    "rel": "rol",
-                    "href": "http://localhost:8082/api/v1/rol/1"
+                    "rel": "role",
+                    "href": "http://localhost:8082/api/v1/role/1"
                 }
             ]
          }
        ```
-   * [Create rol (POST)](http://localhost:8082/api/v1/rol/)
+   * [Create role (POST)](http://localhost:8082/api/v1/role/)
 
      Request:
 
           ```
-           curl --location --request POST 'http://localhost:8082/api/v1/rol/' \
+           curl --location --request POST 'http://localhost:8082/api/v1/role/' \
                 --header 'Content-Type: application/json' \
                 --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzY290dDIiLCJyb2xlcyI6WyJVU0VSIl0sImlzcyI6Ik9vd2xpc2ggVGVhbSBBUEkiLCJleHAiOjE2Njk0ODI3MjcsImlhdCI6MTY2OTQ4MTgyN30.SfX1d8R783hbHsuPnCFkKS8C82ACurRhoIyQnUQ0izN27h7F-kQYfovjvhhPnvPVmk7kNJd128sZohmTP96bMNma5Qot9b1vcp8SIfYwahR7BVE3aoyuFccfU-4jGJMBasS9UVYLvHHjS2DTrj3yrlaRA3CnyYLMY2LfnrvsPV4ItG_THTYl1pqLsNLmemyLp19oNKgHFbZlBLRotqTsQCmcVqRijWhZX0IKOjvsNB3BBZwKhrmr3t72BpVhqOa-8vUnzv9OVnPQsRjck5duFi9ZPj-LtY1eXF2jXNSSOT_vFna9LGy310FmJ_7UfqNutJphr2Xp5mdpjOt2_EyyalZcNpKwGv2V4iUupYLT2r0_kWxuIU4oxFTcmW2IrVpX0Or4M-ns7jVQYCBoGpV1XWSGKOjD6NJWyE72iOxPTyJg3HlLOfT3L_LuGn7Sr_ALxi_aoHB_pvFP-OiP9yXkWMeH6mR8KkJ12MKwrQhZw6M7S-121-95gKalBl6JRym8vuWWAFcm2NzE9toQwrNFAgLTrrOnF7l1-6aTd0W-W97jUD7knBHTp2eRwEHVx7Rw2pVQFAAyDBjSCB8o21nIu_nV7va2zXjBj6sTJHT4lq4oD9RCuTW5P8gYMky_WhLO-jM_vjR1Kdo8uFBijfE94oBQPZGl6x5Skyrj08sWJf0' \
                 --data-raw '{
@@ -363,24 +363,24 @@ The following list depict the available endpoints of the API:
                "name": "QA",
                "links": [
                  {
-                    "rel": "rol",
-                    "href": "http://localhost:8082/api/v1/rol/4"
+                    "rel": "role",
+                    "href": "http://localhost:8082/api/v1/role/4"
                  }
                ]
             }
           ```
-   * [Assign rol (PATCH)](http://localhost:8082/api/v1/rol/)
+   * [Assign role (PATCH)](http://localhost:8082/api/v1/role/)
 
      Request:
 
           ```
-           curl --location --request PATCH 'http://localhost:8082/api/v1/rol/' \
+           curl --location --request PATCH 'http://localhost:8082/api/v1/role/' \
                 --header 'Content-Type: application/json' \
                 --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJzY290dDIiLCJyb2xlcyI6WyJVU0VSIl0sImlzcyI6Ik9vd2xpc2ggVGVhbSBBUEkiLCJleHAiOjE2Njk0ODI3MjcsImlhdCI6MTY2OTQ4MTgyN30.SfX1d8R783hbHsuPnCFkKS8C82ACurRhoIyQnUQ0izN27h7F-kQYfovjvhhPnvPVmk7kNJd128sZohmTP96bMNma5Qot9b1vcp8SIfYwahR7BVE3aoyuFccfU-4jGJMBasS9UVYLvHHjS2DTrj3yrlaRA3CnyYLMY2LfnrvsPV4ItG_THTYl1pqLsNLmemyLp19oNKgHFbZlBLRotqTsQCmcVqRijWhZX0IKOjvsNB3BBZwKhrmr3t72BpVhqOa-8vUnzv9OVnPQsRjck5duFi9ZPj-LtY1eXF2jXNSSOT_vFna9LGy310FmJ_7UfqNutJphr2Xp5mdpjOt2_EyyalZcNpKwGv2V4iUupYLT2r0_kWxuIU4oxFTcmW2IrVpX0Or4M-ns7jVQYCBoGpV1XWSGKOjD6NJWyE72iOxPTyJg3HlLOfT3L_LuGn7Sr_ALxi_aoHB_pvFP-OiP9yXkWMeH6mR8KkJ12MKwrQhZw6M7S-121-95gKalBl6JRym8vuWWAFcm2NzE9toQwrNFAgLTrrOnF7l1-6aTd0W-W97jUD7knBHTp2eRwEHVx7Rw2pVQFAAyDBjSCB8o21nIu_nV7va2zXjBj6sTJHT4lq4oD9RCuTW5P8gYMky_WhLO-jM_vjR1Kdo8uFBijfE94oBQPZGl6x5Skyrj08sWJf0' \
                 --data-raw '{
                       "idUser":"371d2ee8-cdf4-48cf-9ddb-04798b79ad9e",
                       "idTeam": "7676a4bf-adfe-415c-941b-1739af07039b",
-                      "rol": {
+                      "role": {
                          "id":2,
                          "name": "Product Owner"
                       }    
@@ -393,15 +393,15 @@ The following list depict the available endpoints of the API:
                "id": 1,
                "idTeam": "7676a4bf-adfe-415c-941b-1739af07039b",
                "idUser": "371d2ee8-cdf4-48cf-9ddb-04798b79ad9e",
-               "rol": {
+               "role": {
                   "id": 2,
                    "name": "Product Owner",
                    "links": []
                },
                "links": [
                  {
-                    "rel": "rol",
-                    "href": "http://localhost:8082/api/v1/rol/1"
+                    "rel": "role",
+                    "href": "http://localhost:8082/api/v1/role/1"
                  }
                ]
             }
@@ -436,12 +436,12 @@ This API use a MySQL database so we need to configure an instance with the follo
   * Credentials by default.
     * user: root
     * password: 12345
-  * We need to create a database in the MySQL server called ***oowlishroldb***.
+  * We need to create a database in the MySQL server called ***oowlishroledb***.
       ```
-     create database oowlishroldb;
+     create database oowlishroledb;
      ```
   * Database should be expose at default port 3306.
-  * Spring boot will populate 3 initial roles in the rol table:
+  * Spring boot will populate 3 initial roles in the role table:
     * *Developer*
     * *Project Manager*
     * *Tester*
@@ -487,4 +487,4 @@ Complete coverage of the following layers:
 3. Player
    ![](images/Swagger-User.png)
 4. Transfer List
-   ![](images/Swagger-Rol.png)
+   ![](images/Swagger-Role.png)

@@ -1,10 +1,9 @@
 package com.oowlish.rolesapi.service.impl;
 
-import com.oowlish.rolesapi.model.Rol;
 import com.oowlish.rolesapi.model.Team;
 import com.oowlish.rolesapi.model.Member;
-import com.oowlish.rolesapi.model.UserRol;
-import com.oowlish.rolesapi.service.RolService;
+import com.oowlish.rolesapi.model.UserRole;
+import com.oowlish.rolesapi.service.RoleService;
 import com.oowlish.rolesapi.service.TeamService;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -21,9 +20,9 @@ import org.springframework.web.client.RestTemplate;
 public class TeamServiceImpl implements TeamService {
 
   private RestTemplate restTemplate;
-  private RolService rolService;
+  private RoleService rolService;
 
-  public TeamServiceImpl(RestTemplate restTemplate, RolService rolService) {
+  public TeamServiceImpl(RestTemplate restTemplate, RoleService rolService) {
     this.restTemplate = restTemplate;
     this.rolService = rolService;
   }
@@ -42,7 +41,7 @@ public class TeamServiceImpl implements TeamService {
 
     List<Member> members = team.getMembers().stream().map(member -> {
       try {
-        UserRol userRol = rolService.getAssignedRol(member.getId(), team.getId());
+        UserRole userRol = rolService.getAssignedRole(member.getId(), team.getId());
         member.setRol(userRol.getRol().getName());
       } catch (NoSuchElementException ex) {
         member.setRol("Developer");

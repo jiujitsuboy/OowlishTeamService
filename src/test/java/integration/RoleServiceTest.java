@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import com.oowlish.rolesapi.OowlishRolesAPIApplication;
 import com.oowlish.rolesapi.TestConstants;
 import com.oowlish.rolesapi.entity.RoleEnum;
-import com.oowlish.rolesapi.model.Rol;
-import com.oowlish.rolesapi.model.UserRol;
+import com.oowlish.rolesapi.model.Role;
+import com.oowlish.rolesapi.model.UserRole;
 import com.oowlish.rolesapi.security.JwtManager;
 import org.json.JSONException;
 import org.junit.jupiter.api.Assertions;
@@ -34,7 +34,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @ActiveProfiles("test")
 @SpringBootTest(classes = OowlishRolesAPIApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(scripts = "../import.sql")
-class RolServiceTest {
+class RoleServiceTest {
 
   @LocalServerPort
   private int port;
@@ -62,9 +62,9 @@ class RolServiceTest {
     HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
 
-    ResponseEntity<Rol[]> response = restTemplate.exchange(
-        createURLWithPort("/api/v1/rol/"),
-        HttpMethod.GET, entity, Rol[].class);
+    ResponseEntity<Role[]> response = restTemplate.exchange(
+        createURLWithPort("/api/v1/role/"),
+        HttpMethod.GET, entity, Role[].class);
 
     var user = response.getBody();
 
@@ -76,9 +76,9 @@ class RolServiceTest {
 
     HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
-    ResponseEntity<Rol> response = restTemplate.exchange(
-        createURLWithPort("/api/v1/rol/1"),
-        HttpMethod.GET, entity, Rol.class);
+    ResponseEntity<Role> response = restTemplate.exchange(
+        createURLWithPort("/api/v1/role/1"),
+        HttpMethod.GET, entity, Role.class);
 
     var rol = response.getBody();
 
@@ -90,9 +90,9 @@ class RolServiceTest {
 
     HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
-    ResponseEntity<Rol> response = restTemplate.exchange(
-        createURLWithPort("/api/v1/rol/500"),
-        HttpMethod.GET, entity, Rol.class);
+    ResponseEntity<Role> response = restTemplate.exchange(
+        createURLWithPort("/api/v1/role/500"),
+        HttpMethod.GET, entity, Role.class);
 
     var rol = response.getBody();
 
@@ -103,13 +103,13 @@ class RolServiceTest {
   public void createRol() throws JSONException {
 
     headers.add("Content-Type", "application/json");
-    Rol rol = Rol.builder().name("QA").build();
+    Role rol = Role.builder().name("QA").build();
 
-    HttpEntity<Rol> entity = new HttpEntity<>(rol, headers);
+    HttpEntity<Role> entity = new HttpEntity<>(rol, headers);
 
-    ResponseEntity<Rol> response = restTemplate.exchange(
-        createURLWithPort("/api/v1/rol/"),
-        HttpMethod.POST, entity, Rol.class);
+    ResponseEntity<Role> response = restTemplate.exchange(
+        createURLWithPort("/api/v1/role/"),
+        HttpMethod.POST, entity, Role.class);
 
     var rolCreated = response.getBody();
 
@@ -124,13 +124,14 @@ class RolServiceTest {
     String idTeam = "7676a4bf-adfe-415c-941b-1739af07039b";
 
     headers.add("Content-Type", "application/json");
-    UserRol userRol = UserRol.builder().idUser(idUser).idTeam(idTeam).rol(Rol.builder().id(4L).name("QA").build()).build();
+    UserRole userRol = UserRole.builder().idUser(idUser).idTeam(idTeam).rol(
+        Role.builder().id(4L).name("QA").build()).build();
 
-    HttpEntity<UserRol> entity = new HttpEntity<>(userRol, headers);
+    HttpEntity<UserRole> entity = new HttpEntity<>(userRol, headers);
 
-    ResponseEntity<UserRol> response = restTemplate.exchange(
-        createURLWithPort("/api/v1/rol/"),
-        HttpMethod.PATCH, entity, UserRol.class);
+    ResponseEntity<UserRole> response = restTemplate.exchange(
+        createURLWithPort("/api/v1/role/"),
+        HttpMethod.PATCH, entity, UserRole.class);
 
     var userRolCreated = response.getBody();
 

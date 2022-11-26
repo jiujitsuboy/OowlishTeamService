@@ -1,6 +1,6 @@
 package com.oowlish.rolesapi.service.impl;
 
-import com.oowlish.rolesapi.service.RolService;
+import com.oowlish.rolesapi.service.RoleService;
 import com.oowlish.rolesapi.service.UserService;
 import net.minidev.json.JSONObject;
 import org.springframework.http.HttpEntity;
@@ -14,10 +14,10 @@ import org.springframework.web.client.RestTemplate;
 public class UserServiceImpl implements UserService {
 
   private RestTemplate restTemplate;
-  private RolService rolService;
+  private RoleService rolService;
 
 
-  public UserServiceImpl(RestTemplate restTemplate, RolService rolService) {
+  public UserServiceImpl(RestTemplate restTemplate, RoleService rolService) {
     this.restTemplate = restTemplate;
     this.rolService=rolService;
   }

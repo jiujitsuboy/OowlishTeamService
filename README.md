@@ -428,8 +428,22 @@ The following list depict the available endpoints of the API:
    ```
 * The API by default will be reachable in the following URL *http://localhost:8082*
 * *(Optional)* Use [PostMan collection](postman/oowlish.postman_collection.json) to hit the endpoints.
- 
 
+### Setting Database
+* This API use a MySQL database so we need to configure an instance with the following parameters:
+* 
+  * Credentials by default.
+    * user: root
+    * password: 12345
+  * We need to create a database in the MySQL server called ***oowlishroldb***.
+      ```
+     create database oowlishroldb;
+     ```
+  * Database should be expose at default port 3306.
+  * Spring boot will populate 3 initial roles in the rol table:
+    * *Developer*
+    * *Project Manager*
+    * *Tester*
 
 ### Code Coverage
 Complete coverage of the following layers:

@@ -3,7 +3,7 @@
 ### Reference Documentation
 
 This API enhanced these following urls 
-[Teams](https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/teams) and [Users](https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/users) by adding the concept of team rol to users of a team.
+[Teams](https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/teams) and [Users](https://cgjresszgg.execute-api.eu-west-1.amazonaws.com/users) by adding the concept of team role to users of a team.
 The following are the functionalities offered by this API.
 
 * Retrieve all the **Users** of the API *(passthrough)*.
@@ -172,7 +172,7 @@ The following list depict the available endpoints of the API:
             "members": [
               {
                 "id": "371d2ee8-cdf4-48cf-9ddb-04798b79ad9e",
-                "rol": "Developer",
+                "role": "Developer",
                 "links": [
                   {
                      "rel": "self",

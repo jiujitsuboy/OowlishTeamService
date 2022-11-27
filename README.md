@@ -451,7 +451,13 @@ This project comes with a [docker-compose](docker-compose.yaml) file, which star
 * mysql: MySQL server exposed on default port (3304)
 * app: Spring boot application (Rest API).
 
-To start these containers execute the following command
+You need to create the image of the Rest API. For this run the following command
+
+   ```
+     docker build -t team-api:latest .
+   ```
+
+Now, we can execute the docker-compose file. To start these containers execute the following command
 
    ```
      docker-compose up
